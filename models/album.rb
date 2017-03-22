@@ -24,6 +24,12 @@ attr_reader :name, :artist_id
     SqlRunner.run(sql)
   end
 
+  def self.all()
+    sql = "SELECT * FROM albums"
+    result = SqlRunner.run(sql)
+    return result.map{|album| Album.new(album)}
+  end
+
   def save()
     sql = "INSERT INTO albums (
     name,
