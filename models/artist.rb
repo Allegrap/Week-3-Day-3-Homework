@@ -1,8 +1,8 @@
 require('pg')
 require_relative('../db/sql_runner')
-require_relative('albums')
+require_relative('album')
 
-class Artists
+class Artist
 
   attr_reader :name
 
