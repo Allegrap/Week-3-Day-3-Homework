@@ -38,9 +38,14 @@ attr_reader :name, :artist_id
   end
 
   def artist()
-    sql = "SELECT * FROM artists WHERE id = #{@artist_id}"
+    sql = "SELECT * FROM artists WHERE artist_id = #{@artist_id}"
     result = SqlRunner.run(sql)
     return Artist.new(result.first)
+  end
+
+  def delete()
+    sql = "DELETE FROM albums WHERE id = #{@id}"
+    SqlRunner.run(sql)
   end
 
   def self.delete_all()
