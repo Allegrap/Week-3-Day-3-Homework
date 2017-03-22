@@ -19,13 +19,13 @@ class Artist
 
   def save()
     sql = "INSERT INTO artists (name) VALUES ('#{@name}')RETURNING *"
-    @id = SqlRunner.run(sql).first()['artist_id'].to_i
+    @id = SqlRunner.run(sql).first()['id'].to_i
   end
 
-  def album()
+  def albums()
     sql = "SELECT * FROM albums WHERE artist_id = #{@id}"
     result = SqlRunner.run(sql)
-    return Album.new(result.first)
+    return result.map {|album| Album.new(album)}
   end
 
   def delete()

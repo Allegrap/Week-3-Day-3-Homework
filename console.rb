@@ -2,8 +2,8 @@ require('pry')
 require_relative('models/album')
 require_relative('models/artist')
 
-Artist.delete_all()
 Album.delete_all()
+Artist.delete_all()
 
 artist1 = Artist.new({'name' => 'James Blake'})
 artist2 = Artist.new({'name' => 'Allegra'})
@@ -12,6 +12,8 @@ artist1.save()
 artist2.save()
 artist3.save()
 
+# artist has james blake with id of 1
+# album has the coilour in anything with an id of 5 and arist_id of 1
 
 
 album1 = Album.new({
@@ -23,7 +25,7 @@ album1 = Album.new({
 album2 = Album.new({
   'name' => 'fizzy water',
   'genre' => 'gangsta rap',
-  'artist_id' => artist2.id
+  'artist_id' => artist1.id
   })
 
 album3 = Album.new({
