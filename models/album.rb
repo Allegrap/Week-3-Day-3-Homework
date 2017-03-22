@@ -4,7 +4,7 @@ require_relative('artist')
 
 class Album
 
-attr_reader :id, :name, :artist_id
+attr_reader :name, :artist_id
 
   def initialize(options)
     @id = options['id'].to_i
@@ -22,20 +22,26 @@ attr_reader :id, :name, :artist_id
   def self.delete()
     sql = "DELETE FROM albums"
     SqlRunner.run(sql)
+  end
 
   def save()
-    sql = "INSERT INTO music_collection (
+    sql = "INSERT INTO albums (
     name,
     genre,
     artist_id
     ) VALUES (
-    '#{@name}'
-    '#{@genre}'
+    '#{@name}',
+    '#{@genre}',
     #{@artist_id})
     RETURNING *"
     @id = SqlRunner.run(sql).first()['id'].to_i
   end
 
+  def artist()
+    sql = "SELECT * FROM artists WHERE id = #{@artist_id}"
+    result = SqlRunner.run(sql)
+    return Artist.new(result.first)
+  end
 
 
 end
