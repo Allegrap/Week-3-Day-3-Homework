@@ -37,6 +37,19 @@ attr_reader :name, :genre, :artist_id
     @id = SqlRunner.run(sql).first()['id'].to_i
   end
 
+  def update()
+    sql = "UPDATE albums 
+    SET (
+    name, 
+    genre,
+    artist_id) = ( 
+    '#{@name}', 
+    '#{@genre}',
+    #{@artist_id})
+    WHERE id = #{@id}"
+    SqlRunner.run(sql)
+  end
+
   def artists()
     sql = "SELECT * FROM artists WHERE id = #{@artist_id}"
     result = SqlRunner.run(sql)
